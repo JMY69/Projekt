@@ -61,7 +61,6 @@ namespace Testy
             Assert.True(time2 >= time1);
         }
         
-        
         [Fact]
         public void Test7()
         {

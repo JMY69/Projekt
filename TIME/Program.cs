@@ -247,8 +247,14 @@ namespace TIME
         public static TimePeriod operator +(TimePeriod left, TimePeriod right)
         {
             long totalSeconds = left.Seconds + right.Seconds;
-            return new TimePeriod((byte)(totalSeconds / 3600), (byte)((totalSeconds % 3600) / 60), (byte)(totalSeconds % 60));
+
+            byte hours = (byte)(totalSeconds / 3600);
+            byte minutes = (byte)((totalSeconds % 3600) / 60);
+            byte seconds = (byte)(totalSeconds % 60);
+
+            return new TimePeriod(hours, minutes, seconds);
         }
+
     }
 
 }
