@@ -1,15 +1,11 @@
-﻿using System;
+﻿    using System;
 namespace TIME
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Time startTime = new Time(10, 30, 59);
-            Time endTime = new Time(13, 30, 0);
-
-            TimePeriod duration = new TimePeriod(startTime, endTime);
-            Console.WriteLine("Czas trwania: " + duration.ToString()); 
+            
 
         }
     }
@@ -175,6 +171,22 @@ namespace TIME
                 throw new ArgumentException("Invalid time period.");
 
             this.seconds = seconds + minutes * 60 + hours * 3600;
+        }
+        public long ToSeconds()
+        {
+            long totalSeconds = Hours * 3600 + Minutes * 60 + Seconds;
+            return totalSeconds;
+        }
+        public static TimePeriod Plus(TimePeriod timePeriod1, TimePeriod timePeriod2)
+        {
+            long totalSeconds = timePeriod1.ToSeconds() + timePeriod2.ToSeconds();
+
+            
+            int hours = (int)(totalSeconds / 3600) % 24;
+            int minutes = (int)((totalSeconds / 60) % 60);
+            int seconds = (int)(totalSeconds % 60);
+
+            return new TimePeriod((byte)hours, (byte)minutes, (byte)seconds);
         }
 
         public override string ToString()
